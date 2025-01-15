@@ -1,3 +1,5 @@
+using HotelListing.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+/*
+ * Handle Database
+ */
+
+var connectionString = builder.Configuration.GetConnectionString("HotelListingDbConnectionString");
+
+builder.Services.AddDbContext<HoteListingDbContext>(options =>
+{
+    options.UseSqlite(connectionString);
+});
 
 builder.Services.AddCors(options =>
 {
