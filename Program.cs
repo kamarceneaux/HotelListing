@@ -32,6 +32,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseSerilogRequestLogging();
+
 app.UseCors("AllowAll");
 
 app.MapControllers();
