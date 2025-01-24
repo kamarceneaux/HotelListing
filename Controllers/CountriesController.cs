@@ -24,14 +24,14 @@ namespace HotelListing.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Country>>> GetCoutries()
         {
-            return await _context.Coutries.ToListAsync();
+            return await _context.Countries.ToListAsync();
         }
 
         // GET: api/Countries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Country>> GetCountry(int id)
         {
-            var country = await _context.Coutries.FindAsync(id);
+            var country = await _context.Countries.FindAsync(id);
 
             if (country == null)
             {
@@ -77,7 +77,7 @@ namespace HotelListing.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Country>> PostCountry(Country country)
         {
-            _context.Coutries.Add(country);
+            _context.Countries.Add(country);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCountry", new { id = country.Id }, country);
@@ -87,13 +87,13 @@ namespace HotelListing.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCountry(int id)
         {
-            var country = await _context.Coutries.FindAsync(id);
+            var country = await _context.Countries.FindAsync(id);
             if (country == null)
             {
                 return NotFound();
             }
 
-            _context.Coutries.Remove(country);
+            _context.Countries.Remove(country);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace HotelListing.API.Controllers
 
         private bool CountryExists(int id)
         {
-            return _context.Coutries.Any(e => e.Id == id);
+            return _context.Countries.Any(e => e.Id == id);
         }
     }
 }
